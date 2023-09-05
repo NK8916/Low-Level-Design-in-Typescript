@@ -1,6 +1,6 @@
 abstract class Vehicle{
     private licenseNo:Number;
-    public abstract assignTicket(ticket:ParkingTIcket):void;
+    public abstract assignTicket(ticket:ParkingTicket):void;
 }
 
 class Truck extends Vehicle{
@@ -100,12 +100,16 @@ class Address{
     private zipcode:string;
 }
 
-class ParkingTIcket{
+class ParkingTicket{
 
 }
 
 class Entrance{
-    getParkingTicket():ParkingTIcket{return true}
+    getParkingTicket():ParkingTicket{return true}
+}
+
+class Exit{
+    scanTicket():ParkingTicket{return true}
 }
 
 enum PaymentStatus {
@@ -145,7 +149,7 @@ enum PaymentStatus {
     private exit:Map<String,String>;
 
     // Create a hashmap that identifies all currently generated tickets using their ticket number
-    private  tickets:Map<String, ParkingTIcket>;
+    private  tickets:Map<String, ParkingTicket>;
 
     // The ParkingLot is a singleton class that ensures it will have only one active instance at a time
     // Both the Entrance and Exit classes use this class to create and close parking tickets
@@ -165,11 +169,11 @@ enum PaymentStatus {
         return this.parkinglot;
     }
 
-    public addEntrance(entrance:Entrance):boolean{}
-    public addExit(exit:Exit):boolean{}
+    public addEntrance(entrance:Entrance):boolean{return true}
+    public addExit(exit:Exit):boolean{return true}
 
     // This function allows parking tickets to be available at multiple entrances
     public getParkingTicket(vehicle:Vehicle):ParkingTicket {}
 
-    public isFull(type:ParkingSpot):boolean{}
+    public isFull(type:ParkingSpot):boolean{return true}
   }
